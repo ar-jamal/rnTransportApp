@@ -93,7 +93,7 @@ export default function Home() {
         </ImageBackground>
       </View> */}
       {/* <CusHeader /> */}
-      {/* <View style={styles.bodyView}> */}
+      <View style={styles.bodyView}>
         <View style={styles.cardView}>
           <ScrollView>
             {data.length > 0
@@ -123,7 +123,7 @@ export default function Home() {
               )) : null}
           </ScrollView>
         </View>
-      {/* </View> */}
+      </View>
     </SafeAreaView>
   );
 };
@@ -146,11 +146,6 @@ const styles = StyleSheet.create({
   cardView: {
     width: "100%",
     height: "100%",
-    // flexDirection: "row",
-    // justifyContent: "flex-end",
-    // alignItems: "flex-end",
-    // backgroundColor: "lightyellow",
-
   },
   productContainer: {
     width: "90%",

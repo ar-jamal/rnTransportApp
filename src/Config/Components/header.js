@@ -16,7 +16,7 @@ export default function CusHeader() {
 const styles = StyleSheet.create({
     headerView: {
         width: "100%",
-        flex: 1.6,
+        maxHeight: "25%"
     },
     bgColorOverlap: {
         width: "100%",

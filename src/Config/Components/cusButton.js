@@ -19,12 +19,13 @@ const styles = StyleSheet.create({
     button: {
         // width: '40%',
         height: 40,
-        marginTop: 25,
+        marginTop: 50,
         marginBottom: 35,
         fontSize: 18,
         alignItems: 'center',
         justifyContent: 'center',
-        borderBottomWidth: 2,
+        // borderBottomLeftRadius: 20,
+        // borderBottomWidth: 2,
         // backgroundColor: cusColors.melaWhiteGreen,
     },
     buttonText: {
