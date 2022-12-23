@@ -10,62 +10,49 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import auth from '@react-native-firebase/auth';
-import database from "@react-native-firebase/database"
 
 import cusColors from '../../Utils/colors';
 import CusButton from '../Components/cusButton';
 import CusTextInput from '../Components/cusTextInput';
 
-export default function Signup({navigation}) {
+export default function Signin() {
   const [inputText, setInputText] = useState({});
-  // const [filledForm, setFilledForm] = useState([]);
+  const [listItems, setListItems] = useState([]);
   const [index, setIndex] = useState('');
 
   const addHandler = () => {
-    // filledForm.push(inputText);
-    // setFilledForm([...filledForm]);
-    auth()
-      .createUserWithEmailAndPassword(inputText.email, inputText.passowrd)
-      .then(userCredential => {
-        // console.log(userCredential);
-        console.log('User account created & signed in!')
-        const userId = userCredential.user.uid
-        database().ref(`users/${userId}`).set(inputText)
-        .then((success) => {
-          console.log(success)
-          navigation.navigate("Home", inputText.userName)
-        }).catch((err) => {
-            console.log(err)
-          })
-        })
-      }).catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-        }
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        } 
-        console.error(error);
-      });
-    // console.log(inputText);
+    console.log(index);
+    if (index >= '0') {
+      listItems[index] = inputText;
+      setListItems([...listItems]);
+      // console.log(listItems)
+      setInputText('');
+      setIndex('');
+    } else if (inputText) {
+      listItems.push(inputText);
+      setListItems([...listItems]);
+      setInputText('');
+      console.log(listItems);
+    }
   };
-
+  const delHandler = ind => {
+    listItems.splice(ind, 1);
+    // setListItems(...listItems.splice(ind, 1));
+    setListItems([...listItems]);
+    console.log(listItems);
+  };
+  const editHandler = ind => {
+    setIndex(ind);
+    setInputText(listItems[ind]);
+  };
   return (
     <SafeAreaView style={styles.mainView}>
       <View style={styles.headerView}>
-        <Text style={styles.headerText}>Signup</Text>
+        <Text style={styles.headerText}>Signin</Text>
       </View>
       <View style={styles.bodyView}>
         <View style={styles.inputView}>
           <ScrollView>
-            <CusTextInput
-              label="user name"
-              labelColor="lightgreen"
-              onChangeText={e => setInputText({...inputText, userName: e})}
-              value={inputText.userName || ' '}
-              onDelete={() => setInputText(delete inputText.userName)}
-            />
             <CusTextInput
               label="email"
               labelColor="lightgreen"
@@ -89,9 +76,8 @@ export default function Signup({navigation}) {
             color: '#071e30',
             width: '30%',
           }}
-          styleChild={{color: '#071e30'}}
+          styleChild={{color: cusColors.greenShadeDark}}
           onPress={addHandler}
-          keyboardType="password"
         />
       </View>
     </SafeAreaView>
@@ -127,7 +113,7 @@ const styles = StyleSheet.create({
   },
   inputView: {
     width: '60%',
-    height: 230,
+    height: '50%',
   },
 
   // linkText: {
